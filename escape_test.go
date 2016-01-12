@@ -16,3 +16,27 @@ func TestEscapeArg(t *testing.T) {
 		}
 	}
 }
+
+func TestReadableEscapeArg(t *testing.T) {
+	cases := []struct {
+		in       string
+		readable bool
+	}{
+		{"helloworld", true},
+		{"hello world", false},
+		{"'", false},
+		{"", false},
+	}
+	for _, c := range cases {
+		var want string
+		if c.readable {
+			want = c.in
+		} else {
+			want = EscapeArg(c.in)
+		}
+		got := ReadableEscapeArg(c.in)
+		if got != want {
+			t.Fatalf("got %v, wanted %v for %v", got, want, c.in)
+		}
+	}
+}
