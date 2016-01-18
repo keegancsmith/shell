@@ -13,8 +13,8 @@ func EscapeArg(arg string) string {
 }
 
 // ReadableEscapeArg will not escape strings that do not requiring
-// escaping. Note that it is conservative in it's approach, so may escape
-// strings which do not require it.
+// escaping. Note that it is conservative, so may escape strings which do not
+// require it.
 func ReadableEscapeArg(arg string) string {
 	if readableRe.MatchString(arg) {
 		return arg
