@@ -14,4 +14,15 @@ fmt.Println(remoteCmd)
 // Output: ssh ubuntu@foo.com 'find . -iname '\''*.go'\'' | wc -l'
 ```
 
+Also slightly extends `Sprintf` syntax to allow easily passing in slices. This
+is a common use case when interacting with commands that take in a list of
+arguments:
+
+```go
+// Support for passing in a slice of arguments
+gitcmd := shell.Sprintf("git add %S", []string{"foo.go", "bar.go", "test data"})
+fmt.Println(gitcmd)
+// Output: git add foo.go bar.go 'test data'
+```
+
 See https://godoc.org/github.com/keegancsmith/shell for more information.

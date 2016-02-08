@@ -18,6 +18,13 @@ func ExampleSprintf() {
 	// Output: ssh ubuntu@foo.com 'find . -iname '\''*.go'\'' | wc -l'
 }
 
+func ExampleSprintf_StringSlice() {
+	// Support for passing in a slice of arguments
+	gitcmd := shell.Sprintf("git add %S", []string{"foo.go", "bar.go", "test data"})
+	fmt.Println(gitcmd)
+	// Output: git add foo.go bar.go 'test data'
+}
+
 func ExampleCommandf() {
 	out, err := shell.Commandf("echo %s", "hello world").Output()
 	if err != nil {

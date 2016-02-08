@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"io"
 	"os/exec"
+	"reflect"
+	"strings"
+	"unicode"
 )
 
 // Commandf runs a shell command based on the format string
@@ -37,6 +40,20 @@ func (e escapable) Format(f fmt.State, c rune) {
 	}
 	if p, ok := f.Precision(); ok {
 		s += fmt.Sprintf(".%d", p)
+	}
+	// If we have an uppercase format char and a slice, format each slice
+	// element
+	if unicode.IsUpper(c) && reflect.TypeOf(e.x).Kind() == reflect.Slice {
+		s += strings.ToLower(string(c))
+		v := reflect.ValueOf(e.x)
+		for i := 0; i < v.Len(); i++ {
+			formatted := fmt.Sprintf(s, v.Index(i))
+			io.WriteString(f, ReadableEscapeArg(formatted))
+			if i+1 != v.Len() {
+				io.WriteString(f, " ")
+			}
+		}
+		return
 	}
 	s += string(c)
 	formatted := fmt.Sprintf(s, e.x)
