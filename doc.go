@@ -1,5 +1,5 @@
 // Package shell provides utilities for building command strings to execute in
-// sh. It also provides a wrapper around os/exec, but instead of a Args slice
+// sh. It also provides a wrapper around os/exec, but instead of an Args slice
 // you can pass in a format string.
 //
 // A common use case is generating safe strings for passing to commands that

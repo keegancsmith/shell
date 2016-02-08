@@ -1,6 +1,7 @@
-# shell
+shell [![Build Status](https://travis-ci.org/keegancsmith/shell.svg?branch=master)](https://travis-ci.org/) [![GoDoc](https://godoc.org/github.com/keegancsmith/shell?status.svg)](https://godoc.org/github.com/keegancsmith/shell)
+======
 
-Utilities for interacting with the shell. Inspired by libphutil.
+Generate Shell Commands in Go, sprintf Style. Inspired by libphutil.
 
 Quick example:
 
